@@ -16,25 +16,15 @@ class dici(dict):
                 prev = obj
                 obj = obj[part]
             del prev[part]
-        else:
-            dict.__delitem__(self, key)
+        else: dict.__delitem__(self, key)
 
     __delattr__ = __delitem__
 
     def __setitem__(self, key, value):
         if isinstance(value, dict):
             value = dici(**value)
+            dict.__setitem__(self, key, value)
 
-        if '.' in key:
-            obj = self
-            for part in key.split('.')[:-1]:
-
-                if part not in obj:
-                    obj[part] = dici()
-
-                obj = obj[part]
-
-            exec('self.%s="%s"' % (key, value))
         else:
             dict.__setitem__(self, key, value)
 

@@ -5,7 +5,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='dici',
-    version='0.1',
+    version='0.2',
     author='Rodney Gomes',
     author_email='rodneygomes@gmail.com',
     url='',

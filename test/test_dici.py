@@ -51,11 +51,6 @@ class DiciTest(unittest.TestCase):
         dictionary['foo'] = 'bar'
         expect(dictionary.foo).to.eq('bar')
 
-    def test_add_field_to_dici_with_dot_notation_within_index_notation(elf):
-        dictionary = dici()
-        dictionary['foo.bar'] = 'buzz'
-        expect(dictionary.foo.bar).to.eq('buzz')
-
     def test_delete_field_to_dici_with_dot_notation_within_index_notation(elf):
         dictionary = dici()
         dictionary.foo = {
