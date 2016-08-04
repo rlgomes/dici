@@ -51,7 +51,7 @@ class DiciTest(unittest.TestCase):
         dictionary['foo'] = 'bar'
         expect(dictionary.foo).to.eq('bar')
 
-    def test_delete_field_to_dici_with_dot_notation_within_index_notation(elf):
+    def test_delete_field_to_dici_with_dot_notation_within_index_notation(self):
         dictionary = dici()
         dictionary.foo = {
             'bar': 'baz',
@@ -82,3 +82,13 @@ class DiciTest(unittest.TestCase):
         for key in dictionary:
             results.append(key)
         expect(results).to.eq(['foo', 'fizz'])
+
+    def test_dici_set_for_regular_field(self):
+        dictionary = dici()
+        dictionary.set('foo', 'bar')
+        expect(dictionary.foo).to.eq('bar')
+
+    def test_dici_set_for_regular_nested_field(self):
+        dictionary = dici()
+        dictionary.set('foo.bar', 'buzz')
+        expect(dictionary.foo.bar).to.eq('buzz')

@@ -43,7 +43,10 @@ class dici(dict):
             return dict.__getitem__(self, key)
 
     def __getattr__(self, key):
-        return self.__getitem__(key)
+        if key in self.__dict__:
+            return dict.__getattr__(self, key)
+        else:
+            return self.__getitem__(key)
 
     def __setattr__(self, key, value):
         self.__setitem__(key, value)
@@ -57,3 +60,23 @@ class dici(dict):
 
     def __iter__(self):
         return dict.__iter__(self)
+
+    def set(self, key, value):
+        """
+        set the key by making sure to construct a path with separate
+        dictionaries for each element in the key with a `.` separating
+        the names in the key.
+        """
+        if '.' in key:
+            obj = self
+            for part in key.split('.')[:-1]:
+
+                if part not in obj:
+                    obj[part] = dici()
+
+                obj = obj[part]
+
+            exec('self.%s="%s"' % (key, value))
+
+        else:
+            dict.__setitem__(self, key, value)
